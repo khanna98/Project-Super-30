@@ -7,27 +7,25 @@ import android.view.View;
 import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
+    Button Symptom,Disease;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        Button btn = findViewById(R.id.button2);
-        Button btn1 = findViewById(R.id.button3);
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        Symptom=findViewById(R.id.button2);
+        Disease=findViewById(R.id.button3);
+        Symptom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,Symptoms.class);
+                Intent intent=new Intent(HomeActivity.this,Symptoms.class);
                 startActivity(intent);
             }
         });
-
-        btn1.setOnClickListener(new View.OnClickListener() {
+        Disease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,Diseases.class);
+                Intent intent=new Intent(HomeActivity.this,DiseaseActivity.class);
                 startActivity(intent);
             }
         });
