@@ -1,5 +1,6 @@
 package com.example.mayank.illnessdetetor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,7 @@ public class ExpandableListAdapter  extends BaseExpandableListAdapter {
         return false;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
         String headertitle = (String)getGroup(i);
@@ -71,6 +73,7 @@ public class ExpandableListAdapter  extends BaseExpandableListAdapter {
         return view;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         final String childtext = (String)getChild(i, i1);

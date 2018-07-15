@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Illness Detetor</string>
+    <string name="check_by_symptoms">Check By Symptoms</string>
+    <string name="check_by_disease">Check By Disease</string>
+    <string name="illness_detector">Illness Detector</string>
+    <string name="button">Button</string>
+    <string name="check">Check</string>
 </resources>
