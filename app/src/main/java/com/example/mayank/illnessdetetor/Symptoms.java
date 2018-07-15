@@ -44,7 +44,7 @@ public class Symptoms extends AppCompatActivity {
         Show_Deseases.setOnClickListener(new Button.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
-                                                 String checked_symptoms = "";
+                                                 String checked_symptoms;
                                                  int cntChoice = listView.getCount();
                                                  ArrayList<String> symptoms_ar_list = new ArrayList<>();
                                                  SparseBooleanArray pos_Array = listView.getCheckedItemPositions();

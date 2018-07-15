@@ -18,14 +18,16 @@ public class HomeActivity extends AppCompatActivity {
         Symptom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,Symptoms.class);
+                Intent intent;
+                intent = new Intent(HomeActivity.this,Symptoms.class);
                 startActivity(intent);
             }
         });
         Disease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,DiseaseActivity.class);
+                Intent intent;
+                intent = new Intent(HomeActivity.this,DiseaseActivity.class);
                 startActivity(intent);
             }
         });

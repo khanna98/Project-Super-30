@@ -1,13 +1,19 @@
 package com.example.mayank.illnessdetetor;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ExpandableListView;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
+@SuppressLint("Registered")
 public class DiseaseActivity extends AppCompatActivity {
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
@@ -38,7 +44,7 @@ public class DiseaseActivity extends AppCompatActivity {
         expandableListTitle = new ArrayList<>();
         hashMap = new HashMap<>();
         expandableListTitle = db.getDiseases();
-        List<String> Disease = new ArrayList<>();
+        List<String> Disease;
 
         for (int counter = 0; counter < expandableListTitle.size(); counter++) {
             Disease = db.getSymptomsFromDisease(expandableListTitle.get(counter));

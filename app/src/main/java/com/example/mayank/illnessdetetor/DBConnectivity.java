@@ -1,5 +1,6 @@
 package com.example.mayank.illnessdetetor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -17,12 +18,12 @@ import java.util.Set;
 
 public class DBConnectivity extends SQLiteOpenHelper {
 
-    String db_path = "";
-    public static String db_name = "Disease_Symp.db";
-    SQLiteDatabase myDatabase;
-    Context context;
+    private String db_path;
+    private static String db_name = "Disease_Symp.db";
+    private SQLiteDatabase myDatabase;
+    private Context context;
 
-    public DBConnectivity(Context context) {
+    DBConnectivity(Context context) {
         super(context, db_name, null, 10);
         this.context = context;
         this.db_path = context.getDatabasePath(db_name).toString();
@@ -43,8 +44,8 @@ public class DBConnectivity extends SQLiteOpenHelper {
             }
         }
     }
-    public Cursor fetchAll(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
-        return myDatabase.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
+    private Cursor fetchAll() {
+        return myDatabase.query("Disease_Table", null, null, null, null, null, null);
     }
     public void createDatabase() throws IOException {
         boolean dbExists = checkDataBase();
@@ -60,7 +61,7 @@ public class DBConnectivity extends SQLiteOpenHelper {
         }
     }
 
-    public boolean checkDataBase() {
+    private boolean checkDataBase() {
         SQLiteDatabase db = null;
         try {
             String myPath = db_path;
@@ -69,9 +70,9 @@ public class DBConnectivity extends SQLiteOpenHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return db != null ? true : false;
+        return db != null;
     }
-    public void copyData() throws IOException {
+    private void copyData() throws IOException {
         InputStream myInput = context.getAssets().open(db_name);
         Log.e("File opened", "true");
         String outFileName = db_path + db_name;
@@ -103,7 +104,7 @@ public class DBConnectivity extends SQLiteOpenHelper {
 
         ArrayList<String> diseases = new ArrayList<>();
         try {
-            Cursor c = fetchAll("Disease_Table", null, null, null, null, null, null);
+            Cursor c = fetchAll();
             if (c.moveToFirst()) {
                 do {
                     int index = c.getColumnIndex("Disease");
@@ -120,7 +121,7 @@ public class DBConnectivity extends SQLiteOpenHelper {
     public ArrayList<String> getSymptoms() {
         ArrayList<String> symptoms = new ArrayList<>();
         try {
-            Cursor c = myDatabase.rawQuery("SELECT * FROM Symptoms_table", null);
+            @SuppressLint("Recycle") Cursor c = myDatabase.rawQuery("SELECT * FROM Symptoms_table", null);
             if (c.moveToFirst()) {
                 do {
                     int index = c.getColumnIndex("Symptoms");
@@ -139,7 +140,7 @@ public class DBConnectivity extends SQLiteOpenHelper {
 
         ArrayList<String> symptoms = new ArrayList<>();
         try {
-            Cursor c = myDatabase.rawQuery("SELECT Symptoms, Disease FROM Symptoms_table a INNER JOIN Map b on a.Sym_id=b.sym_id INNER JOIN Disease_table c ON b.dis_id=c.Dis_id ORDER BY Disease ", null);
+            @SuppressLint("Recycle") Cursor c = myDatabase.rawQuery("SELECT Symptoms, Disease FROM Symptoms_table a INNER JOIN Map b on a.Sym_id=b.sym_id INNER JOIN Disease_table c ON b.dis_id=c.Dis_id ORDER BY Disease ", null);
             //given query
             if (c.moveToFirst()) {
                 do {
@@ -164,7 +165,7 @@ public class DBConnectivity extends SQLiteOpenHelper {
 
         Set<String> diseases = new HashSet<>();
         try {
-            Cursor c = myDatabase.rawQuery("SELECT Symptoms, Disease FROM Symptoms_table a INNER JOIN Map b on a.Sym_id=b.sym_id INNER JOIN Disease_table c ON b.dis_id=c.Dis_id ORDER BY Disease ", null);
+            @SuppressLint("Recycle") Cursor c = myDatabase.rawQuery("SELECT Symptoms, Disease FROM Symptoms_table a INNER JOIN Map b on a.Sym_id=b.sym_id INNER JOIN Disease_table c ON b.dis_id=c.Dis_id ORDER BY Disease ", null);
             //given sql query
             if (c.moveToFirst()) {
                 do {
